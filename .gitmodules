@@ -1,0 +1,9 @@
+[submodule "queue_using_array_in_c"]
+	path = queue_using_array_in_c
+	url = git@github.com:l-kaushik/queue_using_array_in_c.git
+[submodule "circular_queue_in_c"]
+	path = circular_queue_in_c
+	url = git@github.com:l-kaushik/circular_queue_in_c.git
+[submodule "queue_using_linkedList_in_c"]
+	path = queue_using_linkedList_in_c
+	url = git@github.com:l-kaushik/queue_using_linkedList_in_c.git
