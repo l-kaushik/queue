@@ -16,9 +16,10 @@ public:
     //Getters
     int getValue()const;
     Node* getNextNode()const;
-    
+
     //Setters
-    void setValue(int value, Node* next);
+    void setValue(int value);
+    void setNextNode(Node *next);
 
     //Functions
     void display()const;

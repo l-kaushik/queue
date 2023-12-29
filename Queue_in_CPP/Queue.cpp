@@ -21,9 +21,13 @@ Node* Node::getNextNode() const
 }
 
 //Setters
-void Node::setValue(int value, Node* next)
+void Node::setValue(int value)
 {
     m_value = value;
+}
+
+void Node::setNextNode(Node *next)
+{
     m_next = next;
 }
 
