@@ -1,9 +1,8 @@
 #include "Queue.h"
 
 int main(){
-    Node *temp = new Node(4);
-    Node obj(temp);
+    Queue obj({1,2,3,4,5});
 
-    obj.getNextNode()->display();
+    obj.display();
     return 0;
 }

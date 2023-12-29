@@ -36,3 +36,40 @@ void Node::display() const
 {
     std::cout<<"Value: "<<m_value;
 }
+
+//QUEUE
+
+//constructor and destructor
+Queue::Queue() :m_first(nullptr), m_rear(nullptr){}
+Queue::Queue(std::initializer_list<int> values)
+{
+    initializer(values);
+}
+
+//Initializer    
+void Queue::initializer(std::initializer_list<int> list)
+{
+    for(int value: list)
+    {
+       if(m_first == nullptr)
+            m_first = m_rear = new Node(value);
+        else if(m_rear->getNextNode() == nullptr)
+        {
+            m_rear->setNextNode(new Node(value));
+            m_rear = m_rear->getNextNode();
+        }
+        else
+            m_rear = m_rear->getNextNode();
+    }
+}
+
+//Functions
+void Queue::display()const
+{
+    Node *temp = m_first;
+    while(temp != nullptr)
+    {
+        std::cout<<temp->getValue()<<' ';
+        temp = temp->getNextNode();
+    }
+}
