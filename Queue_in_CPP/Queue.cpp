@@ -1,26 +1,26 @@
 #include "Queue.h"
 
-//NODE
+// NODE
 
-//constructors and destructors
-Node::Node() : m_value(0), m_next(nullptr){}
-Node::Node(int value) : m_value (value){}
-Node::Node(Node *next) : m_next (next){}
+// constructors and destructors
+Node::Node() : m_value(0), m_next(nullptr) {}
+Node::Node(int value) : m_value(value) {}
+Node::Node(Node *next) : m_next(next) {}
 Node::Node(int value, Node *next)
-    :m_value (value), m_next (next) {}
+    : m_value(value), m_next(next) {}
 
-//Getters
+// Getters
 int Node::getValue() const
 {
     return m_value;
 }
 
-Node* Node::getNextNode() const
+Node *Node::getNextNode() const
 {
     return m_next;
 }
 
-//Setters
+// Setters
 void Node::setValue(int value)
 {
     m_value = value;
@@ -31,45 +31,57 @@ void Node::setNextNode(Node *next)
     m_next = next;
 }
 
-//Functions
+// Functions
 void Node::display() const
 {
-    std::cout<<"Value: "<<m_value;
+    std::cout << "Value: " << m_value;
 }
 
-//QUEUE
+// QUEUE
 
-//constructor and destructor
-Queue::Queue() :m_first(nullptr), m_rear(nullptr){}
+// constructor and destructor
+Queue::Queue() : m_first(nullptr), m_rear(nullptr) {}
 Queue::Queue(std::initializer_list<int> values)
 {
     initializer(values);
 }
 
-//Initializer    
+// Initializer
 void Queue::initializer(std::initializer_list<int> list)
 {
-    for(int value: list)
+    for (int value : list)
     {
-       if(m_first == nullptr)
-            m_first = m_rear = new Node(value);
-        else if(m_rear->getNextNode() == nullptr)
-        {
-            m_rear->setNextNode(new Node(value));
-            m_rear = m_rear->getNextNode();
-        }
-        else
-            m_rear = m_rear->getNextNode();
+        insertValue(value);
     }
 }
 
-//Functions
-void Queue::display()const
+void Queue::insertValue(int value)
+{
+    if (m_first == nullptr)
+        m_first = m_rear = new Node(value);
+    else
+    {
+        m_rear->setNextNode(new Node(value));
+        m_rear = m_rear->getNextNode();
+    }
+}
+
+// Functions
+void Queue::display() const
 {
     Node *temp = m_first;
-    while(temp != nullptr)
+    while (temp != nullptr)
     {
-        std::cout<<temp->getValue()<<' ';
+        std::cout << temp->getValue() << ' ';
         temp = temp->getNextNode();
     }
+}
+
+void Queue::enqueue(int value)
+{
+    insertValue(value);
+}
+
+void Queue::dequeue()
+{
 }

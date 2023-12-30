@@ -29,14 +29,18 @@ class Queue
 private:
     Node * m_first{nullptr}; 
     Node * m_rear{nullptr};
+
+    //Initializer
+    void initializer(std::initializer_list<int> list);
+    void insertValue(int value);
+
 public:
     //constructor and destructor
     Queue();
     Queue(std::initializer_list<int> values);
 
-    //Initializer
-    void initializer(std::initializer_list<int> list);
-
     //Functions
     void display()const;
+    void enqueue(int value);
+    void dequeue();
 };
