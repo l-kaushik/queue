@@ -51,18 +51,7 @@ void Queue::initializer(std::initializer_list<int> list)
 {
     for (int value : list)
     {
-        insertValue(value);
-    }
-}
-
-void Queue::insertValue(int value)
-{
-    if (m_first == nullptr)
-        m_first = m_rear = new Node(value);
-    else
-    {
-        m_rear->setNextNode(new Node(value));
-        m_rear = m_rear->getNextNode();
+        enqueue(value);
     }
 }
 
@@ -79,9 +68,21 @@ void Queue::display() const
 
 void Queue::enqueue(int value)
 {
-    insertValue(value);
+    if (m_first == nullptr)
+        m_first = m_rear = new Node(value);
+    else
+    {
+        m_rear->setNextNode(new Node(value));
+        m_rear = m_rear->getNextNode();
+    }
 }
 
 void Queue::dequeue()
 {
+   if(m_first != nullptr)
+   {
+        Node *temp = m_first;
+        m_first = m_first->getNextNode();
+        delete temp;
+   }
 }

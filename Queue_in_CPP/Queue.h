@@ -32,7 +32,6 @@ private:
 
     //Initializer
     void initializer(std::initializer_list<int> list);
-    void insertValue(int value);
 
 public:
     //constructor and destructor
