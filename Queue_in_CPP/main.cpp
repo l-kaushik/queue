@@ -1,9 +1,8 @@
 #include "Queue.h"
+#include <string>
 
 int main(){
-    Queue obj({1,2,3,4,5});
-    Queue obj2(obj);
-    obj2.display();
-
+   Queue<std::string> a({"Hello", "world"});
+    a.display();
     return 0;
 }
