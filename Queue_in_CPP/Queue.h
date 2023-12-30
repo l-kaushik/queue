@@ -36,8 +36,13 @@ private:
 public:
     //constructor and destructor
     Queue();
+    Queue(const Queue &other);  //copy constructor
     Queue(std::initializer_list<int> values);
     ~Queue();
+
+    //Accessors
+    int getFirst()const;
+    int getLast()const;
 
     //Functions
     void display()const;
@@ -46,4 +51,19 @@ public:
     constexpr bool isEmpty()const;
     void clear();
 
+    //Operator overloading
+    Queue &operator=(const Queue& other)
+    {
+        this->clear();
+        
+        Node *temp = other.m_first;
+
+        while(temp != nullptr)
+        {
+            this->enqueue(temp->getValue());
+            temp = temp->getNextNode();
+        }
+
+        return *this;
+    }
 };

@@ -41,6 +41,13 @@ void Node::display() const
 
 // constructor and destructor
 Queue::Queue() : m_first(nullptr), m_rear(nullptr) {}
+
+//copy constructor
+Queue::Queue(const Queue &other)
+{
+   *this = other;
+}
+
 Queue::Queue(std::initializer_list<int> values)
 {
     initializer(values);
@@ -59,6 +66,17 @@ Queue::~Queue()
 {
     while(!isEmpty())
         dequeue();
+}
+
+//Accessors
+int Queue::getFirst()const
+{
+    return m_first->getValue();
+}
+
+int Queue::getLast()const
+{
+    return m_rear->getValue();
 }
 
 // Functions
