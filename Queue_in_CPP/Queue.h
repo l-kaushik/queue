@@ -37,9 +37,13 @@ public:
     //constructor and destructor
     Queue();
     Queue(std::initializer_list<int> values);
+    ~Queue();
 
     //Functions
     void display()const;
     void enqueue(int value);
     void dequeue();
+    constexpr bool isEmpty()const;
+    void clear();
+
 };

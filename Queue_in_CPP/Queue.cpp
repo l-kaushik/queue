@@ -55,6 +55,12 @@ void Queue::initializer(std::initializer_list<int> list)
     }
 }
 
+Queue::~Queue()
+{
+    while(!isEmpty())
+        dequeue();
+}
+
 // Functions
 void Queue::display() const
 {
@@ -68,7 +74,7 @@ void Queue::display() const
 
 void Queue::enqueue(int value)
 {
-    if (m_first == nullptr)
+    if (isEmpty())
         m_first = m_rear = new Node(value);
     else
     {
@@ -79,10 +85,21 @@ void Queue::enqueue(int value)
 
 void Queue::dequeue()
 {
-   if(m_first != nullptr)
+   if(isEmpty())
    {
         Node *temp = m_first;
         m_first = m_first->getNextNode();
         delete temp;
    }
+}
+
+constexpr bool Queue::isEmpty()const
+{
+    return m_first == nullptr;
+}
+
+void Queue::clear()
+{
+    while(m_first != nullptr)
+        dequeue();
 }
