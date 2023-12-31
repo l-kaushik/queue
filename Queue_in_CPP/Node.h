@@ -7,25 +7,31 @@ template <typename T>
 class Node
 {
 private:
-    T m_value {};
-    Node<T>* m_next {nullptr};
+    T m_value{};
+    Node<T> *m_next{nullptr};
+
 public:
-    //constructors and destructors
+    // constructors and destructors
     Node();
     Node(T value);
     Node(Node<T> *next);
     Node(T value, Node<T> *next);
 
-    //Getters
-    T getValue()const;
-    Node<T>* getNextNode()const;
+    // copy contructor, copy assignment operator and destructor
+    Node(const Node<T> &other);
+    Node<T> &operator=(const Node<T> &other);
+    ~Node();
 
-    //Setters
+    // Getters
+    T getValue() const;
+    Node<T> *getNextNode() const;
+
+    // Setters
     void setValue(T value);
     void setNextNode(Node<T> *next);
 
-    //Functions
-    void display()const;
+    // Functions
+    void display() const;
 };
 
 //<--------- METHOD DEFINITIONS --------->
@@ -43,6 +49,29 @@ Node<T>::Node(Node<T> *next) : m_next(next) {}
 template <typename T>
 Node<T>::Node(T value, Node<T> *next)
     : m_value(value), m_next(next) {}
+
+// copy contructor, copy assignment operator and destructor
+template <typename T>
+Node<T>::Node(const Node<T> &other)
+    : m_value(other.m_value), m_next(other.m_next)
+{}
+
+template <typename T>
+Node<T>& Node<T>::operator=(const Node<T> &other)
+{
+    this->m_value = other.m_value;
+
+    delete m_next;
+    m_next = nullptr;
+    if(other.m_next)
+        this->m_next = new Node<T>(*other.m_next);
+
+    return *this;
+}
+
+template <typename T>
+Node<T>::~Node()
+{}
 
 // Getters
 template <typename T>

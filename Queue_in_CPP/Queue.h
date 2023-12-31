@@ -118,10 +118,14 @@ void Queue<T>::enqueue(T value)
 template <typename T>
 void Queue<T>::dequeue()
 {
-    if (isEmpty())
+    if (!isEmpty())
     {
         Node<T> *temp = m_first;
         m_first = m_first->getNextNode();
+        
+        if(m_first == nullptr)
+            m_rear = nullptr;
+
         delete temp;
     }
 }
