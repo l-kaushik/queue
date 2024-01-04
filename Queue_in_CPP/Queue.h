@@ -11,9 +11,6 @@ private:
     Node<T> *m_first{nullptr};
     Node<T> *m_rear{nullptr};
 
-    // Initializer
-    void initializer(std::initializer_list<T> list);
-
 public:
     // constructor and destructor
     Queue();
