@@ -1,41 +1,40 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
-//External required header file
+// External required header file
 #include "Node.h"
 
 template <typename T>
 class Queue
 {
 private:
-    Node<T> * m_first{nullptr}; 
-    Node<T> * m_rear{nullptr};
+    Node<T> *m_first{nullptr};
+    Node<T> *m_rear{nullptr};
 
-    //Initializer
+    // Initializer
     void initializer(std::initializer_list<T> list);
 
 public:
-    //constructor and destructor
+    // constructor and destructor
     Queue();
-    Queue(const Queue<T> &other);  //copy constructor
+    Queue(const Queue<T> &other); // copy constructor
     Queue(std::initializer_list<T> values);
     ~Queue();
 
-    //Accessors
-    T getFirst()const;
-    T getLast()const;
+    // Accessors
+    T getFirst() const;
+    T getLast() const;
 
-    //Functions
-    void display()const;
+    // Functions
+    void display() const;
     void enqueue(T value);
     void dequeue();
-    constexpr bool isEmpty()const;
+    constexpr bool isEmpty() const;
     void clear();
 
-    //Operator overloading
-    Queue<T> &operator=(const Queue<T>& other);
+    // Operator overloading
+    Queue<T> &operator=(const Queue<T> &other);
 };
-
 
 //<--------------- METHOD DEFINITIONS --------------->
 
@@ -53,14 +52,7 @@ Queue<T>::Queue(const Queue<T> &other)
 template <typename T>
 Queue<T>::Queue(std::initializer_list<T> values)
 {
-    initializer(values);
-}
-
-// Initializer
-template <typename T>
-void Queue<T>::initializer(std::initializer_list<T> list)
-{
-    for (T value : list)
+    for (T value : values)
     {
         enqueue(value);
     }
@@ -69,7 +61,7 @@ void Queue<T>::initializer(std::initializer_list<T> list)
 template <typename T>
 Queue<T>::~Queue()
 {
-    while (!isEmpty())
+    while(!isEmpty())
         dequeue();
 }
 
@@ -122,10 +114,11 @@ void Queue<T>::dequeue()
     {
         Node<T> *temp = m_first;
         m_first = m_first->getNextNode();
-        
-        if(m_first == nullptr)
+
+        if (m_first == nullptr)
             m_rear = nullptr;
 
+        temp->setNextNode(nullptr);
         delete temp;
     }
 }
@@ -145,15 +138,30 @@ void Queue<T>::clear()
 
 // Operator overloading
 template <typename T>
-Queue<T>& Queue<T>::operator=(const Queue<T> &other)
+Queue<T> &Queue<T>::operator=(const Queue<T> &other)
 {
-    this->clear();
+    if (this == &other)
+        return *this;
 
-    Node<T> *temp = other.m_first;
+    delete m_first;
+    delete m_rear;
 
-    while (temp != nullptr)
+    m_first = nullptr;
+    m_rear = nullptr;
+
+    Node<T> *temp{other.m_first};
+
+    while (temp)
     {
-        this->enqueue(temp->getValue());
+        if (m_first == nullptr)
+        {
+            m_first = new Node(other.m_first->getValue());
+            m_rear = m_first;
+        }
+        else{
+            m_rear->setNextNode(new Node(temp->getValue()));
+            m_rear = m_rear->getNextNode();
+        }
         temp = temp->getNextNode();
     }
 
